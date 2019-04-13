@@ -1184,7 +1184,7 @@ $\hspace*{2cm} SST = SSE + SSR$
   Tips: Divide numerator and denominator of $F$ by SST to find $R^2$.
   \item For simple linear regression, since $p=1$, then \\
   $\hspace*{2cm} T_{(n)} = \sqrt{F_{1,n}}$.
-  \item \textbf{Partial Fisher test:} To test is $q$ added variables have signifiance. \\
+  \item \textbf{Partial Fisher test:} To test is $q$ added variables have signifiance. \\ $H_0$ : reduced model is adequate. \\ $H_1$ : reduced model isn't adequate (\emph{keep the full model}). \\
   $\hspace*{1cm} F_{\Delta_{df},n-p'} = \frac{SSE^{(0)} - SSE^{(1)}/\Delta_{df}}{SSE^{(1)}/(n-p')}$
   \item The \textbf{Variance Inflation Factor} test the collinearity of the features. To mesure it, we take the $x_j$ feature and take it as the response. Let $R_{(j)}^2$ be the $R^2$ of this regression. \\
   $\hspace*{2cm} \textrm{VIF} = \frac{1}{1 - r_{(j)}^2}$
@@ -1195,7 +1195,7 @@ $\hspace*{2cm} SST = SSE + SSR$
 
 \end{itemize}
 
-\section*{Lesson 49: Validation} 
+\section*{Lesson 49: Validation}
 \begin{itemize}[align=left,leftmargin=*]
    \item The \textbf{Hat matrix} put a hat on $y$ since $\hat{\matr{y}} = \matr{H}\matr{y}$. \\
    $\hspace*{2cm} \matr{H} = \matr{X}(\matr{X}^\intercal\matr{X})^{-1}\matr{x}^\intercal$
@@ -1205,15 +1205,15 @@ $\hspace*{2cm} SST = SSE + SSR$
    \item The \textbf{studentized residuals} are define as \\
    $\hspace*{2cm} r_i = \frac{\hat{\varepsilon}_i}{\sqrt{S^2(1 - h_{ii})}}$
    \item[] where $h_{ii}$ is the \textbf{leverage}. Average leverage should be at $\frac{p'}{n}$.$\quad \sum h_{ii} = p'$
-   \item A \textbf{influence point} is a observatio that influence a lot $y$. A \textbf{outliers} is a observation that have $|r_i|>3$. 
+   \item A \textbf{influence point} is a observatio that influence a lot $y$. A \textbf{outliers} is a observation that have $|r_i|>3$.
    \item Two mesure for influence point.
    \begin{itemize}
       \item $\mathrm{DFITS}_i = r_i \sqrt{\frac{h_{ii}}{1- h_{ii}}}$
       \item \textbf{Cook:} $D_i = r_i^2 \frac{h_{ii}}{p'(1 - h_{ii})}$
-      \item[] $D_i>1$ is too high. 
+      \item[] $D_i>1$ is too high.
    \end{itemize}
- \end{itemize} 
- 
+ \end{itemize}
+
 \section*{Lesson 50: Prediction}
 \begin{itemize}[align=left,leftmargin=*]
     \item A \textbf{confidence interval} for predicted values. \\
@@ -1221,7 +1221,7 @@ $\hspace*{2cm} SST = SSE + SSR$
     \item A \textbf{prediction interval} for predicted values. \\
     $\hspace*{0.5cm}y^{*} \in \hat{y}^{*} \pm t_{(n-2)} \sqrt{S^2\left(1+\frac{1}{n}+\frac{(x^{*} - \bar{x})^2}{S_{xx}}\right)}$
 \end{itemize}
- 
+
 \section*{Lesson 51: ANOVA}
 \subsubsection*{One-factor ANOVA}
 $\hspace*{2cm} \mathrm{SST} = \mathrm{SSE} + \mathrm{SSTR}$
@@ -1233,8 +1233,8 @@ $\hspace*{2cm} \mathrm{SST} = \mathrm{SSE} + \mathrm{SSTR}$
          $Y = \mu + \varepsilon_{ij}$ & SST & $D_M$ \\
          $Y = \mu_i + \varepsilon_{ij}$ & SSE & $D_A$ \\
          \hline
-      \end{tabular} 
-   \end{center} 
+      \end{tabular}
+   \end{center}
 \begin{itemize}[align=left,leftmargin=*]
    \item  \textbf{Within sum of square} \\
    $\hspace*{1cm} \mathrm{SSE} = \sum\limits_{i=1}^k \sum\limits_{j=1}^{n_i} (y_{ij} - \bar{y}_{i\Sigma})^2$
@@ -1258,19 +1258,19 @@ $\hspace*{1.5cm} \mathrm{SST} = \mathrm{SSE} + \mathrm{SSTR} + \mathrm{SSB}$
          $Y = \mu + \beta_j + \varepsilon_{ij}$ &SSB$(b-1)$ \\
          $Y = \mu +\alpha_i +  \beta_j + \varepsilon_{ij}$ & SSE$(k-1)(b-1)$  \\
          \hline
-      \end{tabular} 
-   \end{center} 
+      \end{tabular}
+   \end{center}
 \begin{itemize}[align=left,leftmargin=*]
-  \item The formula are the same but $n_i$ is $k$ for SSTR and $b$ for SSB. 
+  \item The formula are the same but $n_i$ is $k$ for SSTR and $b$ for SSB.
 \end{itemize}
 \subsubsection*{Two-factor ANOVA with replication}
 \begin{itemize}[align=left,leftmargin=*]
    \item To test interaction:\\
-   $F_{(I-1)(J-1),IJ(K-1)} = \frac{(D_I - D_s)/(I-1)(J-1)}{D_s/IJ(k-1)}$ 
+   $F_{(I-1)(J-1),IJ(K-1)} = \frac{(D_I - D_s)/(I-1)(J-1)}{D_s/IJ(k-1)}$
    \item To test factor A:\\
-   $F_{(I-1),IJ(K-1)} = \frac{(D_B - D_I)/(I-1)}{D_s/IJ(k-1)}$ 
+   $F_{(I-1),IJ(K-1)} = \frac{(D_B - D_I)/(I-1)}{D_s/IJ(k-1)}$
    \item To test factor B: \\
-   $F_{(J-1),IJ(K-1)} = \frac{(D_M - D_B)/(J-1)}{D_s/IJ(k-1)}$ 
+   $F_{(J-1),IJ(K-1)} = \frac{(D_M - D_B)/(J-1)}{D_s/IJ(k-1)}$
    \item[] where $D_s$ is the satured model, I for additive model.
    \item ANCOVA
 \end{itemize}
@@ -1279,16 +1279,16 @@ $\hspace*{1.5cm} \mathrm{SST} = \mathrm{SSE} + \mathrm{SSTR} + \mathrm{SSB}$
 \section*{Lesson 52: Measures of Fit II}
 For \textbf{contingencies table}  with binomial or poisson distribution.
 \begin{itemize}[align=left,leftmargin=*]
-%    \item Deviance: $D = 2 \sum O_i \ln \frac{O_i}{E_i}$ 
+%    \item Deviance: $D = 2 \sum O_i \ln \frac{O_i}{E_i}$
    \item Pearson: $\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i} \sim \chi_{(n-p')}^2$
    \item Likelihood ratio chi-square: \\ $\hspace*{1.5cm} C = 2[\ell - \ell_{\mathbf{min}}] \sim \chi_{(p'-1)}^2$
-   \item \textbf{Pseudo}$R^2$: $\mathrm{pseudo}R^2 = 
+   \item \textbf{Pseudo}$R^2$: $\mathrm{pseudo}R^2 =
    frac{\ell_{\mathbf{min}} -  \ell}{\ell_{\mathbf{min}}}$
 \end{itemize}
 \subsubsection*{Residus}
 \begin{itemize}[align=left,leftmargin=*]
    \item Pearson residual: $X_k = \frac{y_i - \hat{\mu}_i}{\sqrt{\var{\hat{\mu}_i}}}$
-   \item Deviance residual: $d_k = s_k\sqrt{\mathrm{deviance}}$ 
+   \item Deviance residual: $d_k = s_k\sqrt{\mathrm{deviance}}$
    \item[] where $s_k$ is the signe of $y_k-\hat{y}_i$
    \item To standartize them, divide by $\sqrt{1-h_{ii}}$
 \end{itemize}
@@ -1297,7 +1297,7 @@ For \textbf{contingencies table}  with binomial or poisson distribution.
 \section*{Lesson 53: Resampling Methods}
 \begin{itemize}[align=left,leftmargin=*]
    \item \textbf{Cross-Validation:}\\
-  $\hspace*{1.5cm}  \mathrm{CV}_{(K)} = \frac{1}{k} \sum\limits_{i=1}^k MSE_i $ 
+  $\hspace*{1.5cm}  \mathrm{CV}_{(K)} = \frac{1}{k} \sum\limits_{i=1}^k MSE_i $
   \item[] If $k=n$ then is the $\mathrm{LOOCV}$ statistic.
   \item $\mathrm{LOOCV}$ for least-square regression: \\
   $\hspace*{1.5cm} \mathrm{CV}_{(K)} = \frac{1}{n} \sum_{i=1}^n \left( \frac{\varepsilon_i}{1-h_{ii}}\right)^2$
@@ -1314,16 +1314,16 @@ Using a lot of feature will result of lower standard error on training data, but
     \item Otherwise, we compare with: Mallow's $C_p$, AIC, BIC and adjusted $R^2$.
    \end{itemize}
    \item \textbf{Foward stepwise selection} consist of starting with the null, then fit $k$ models with one variable and select the best base on SSE, then fit $k-1$ variables and so on. We obtain $k+1$ model, the best for each number of predictor, and select the final one with cross-validation or the 4 statistics. For categorial variables, each categorie is added independently.
-   \item \textbf{Total fitted model:} 
+   \item \textbf{Total fitted model:}
    \begin{itemize}
-      \item Foward: $1 + \sum\limits_{i=0}^{\min(p,n)} (\min(p,n) - i)$ 
+      \item Foward: $1 + \sum\limits_{i=0}^{\min(p,n)} (\min(p,n) - i)$
       \item Backward: $1 + \sum\limits_{i=1}^{\min(p,n)} i$
    \end{itemize}
 \end{itemize}
 \subsubsection*{Choosing the best model}
 \begin{itemize}
    \item \textbf{Cross-validation} is the more accurate.
-   \item \textbf{Mallow's $\mathbf{C_p}$:} $C_p = \frac{1}{n}(SSE + 2p\hat{\sigma}^2)$ 
+   \item \textbf{Mallow's $\mathbf{C_p}$:} $C_p = \frac{1}{n}(SSE + 2p\hat{\sigma}^2)$
    \item[] IF $\hat{\sigma}^2$ is unbiased then $C_p$ is unbiased.
    \item \textbf{Adjested $\mathbf{R^2}$:} $R_a^2 = 1 -  \frac{MSE}{MST}$
    \item We want the lowest Mallow's $C_p$, AIC, BIC and the heighest $R_a^2$.
@@ -1352,7 +1352,7 @@ Using a lot of feature will result of lower standard error on training data, but
    \begin{itemize}
       \item Allows nonlinear fits for each explanatory variable.
       \item Effet on each explanatory is separate, so easily identifiable.
-      \item Does not allow foe effect of interaction among variable. 
+      \item Does not allow foe effect of interaction among variable.
    \end{itemize}
 \end{itemize}
 
@@ -1361,7 +1361,7 @@ Using a lot of feature will result of lower standard error on training data, but
 \section*{Lesson 57: Trend and \\Seasonality}
 \begin{itemize}[align=left,leftmargin=*]
   \item \textbf{Trend} measures the amount by which the serie increase from period to period.
-  \item \textbf{Seasonal} variation measure cycle within a year.  
+  \item \textbf{Seasonal} variation measure cycle within a year.
   \item \textbf{Decomposition models}
   \begin{itemize}
      \item  Additive Model: $x_t = m_t + s_t + z_t$
@@ -1370,7 +1370,7 @@ Using a lot of feature will result of lower standard error on training data, but
   \end{itemize}
   \item \textbf{Centered moving average:} \\
   $\hat{m}_t = \frac{0.5m_{t-k} + m_{t-k+1} + ... + m_t + ... + m_{t+k-1} + 0.5m_{t+k}}{2k}$
-  \item \textbf{Seasonal variation factor:}  
+  \item \textbf{Seasonal variation factor:}
   \begin{itemize}
      \item Additive Seasonality: $\hat{s}_t = x_t - \hat{m}_t$
      \item[] Ajusted so that $\sum (s_t + c) = 0$.
@@ -1396,7 +1396,7 @@ Using a lot of feature will result of lower standard error on training data, but
 \end{itemize}
 \subsubsection*{Relationships of different time serie}
 \begin{itemize}[align=left,leftmargin=*]
-   \item A \textbf{leading variable} is one that impact another.   
+   \item A \textbf{leading variable} is one that impact another.
    \item \textbf{Cross-covariance} \\
     $\gamma_k(x,y) = \esp{(x_{t+k} - \mu_x)(y_t - \mu_y)} \quad (\textbf{ccvf}) $
     \item[] $c_k = \frac{1}{n} \sum\limits_{i=1}^{n-k} (x_{t+k} - \bar{x})(y_t - \bar{y})\quad (\textbf{sample ccvf})$
@@ -1418,29 +1418,29 @@ Using a lot of feature will result of lower standard error on training data, but
    \item A \textbf{Random Walks} is a nonstationary time series which is the accumulation of white noise. The correlogram will decrease slowly from 1 to 0.
    $\hspace*{2cm}x_i = w_i$ \\
    $\hspace*{2cm}x_t = x_{t-1} + w_t$
-   \item[] with 
+   \item[] with
    \begin{align*}
         \hspace*{1cm}
       \mu(t) &= 0 \\
       \sigma^2(t) &= t\sigma_w^2 \\
       \gamma_k(t) &= t\sigma_w^2 \\
       \rho_k(t) &= \frac{1}{\sqrt{1 + \frac{k}{t}}}
-   \end{align*} 
+   \end{align*}
    \item A \textbf{Walk with drift} drift the mean $\mu(t) = t\delta$ by don't affect variance and autocorrelations.
-   $\hspace*{2cm} x_t = x_{t-1} + \delta + w_t$ 
+   $\hspace*{2cm} x_t = x_{t-1} + \delta + w_t$
 \end{itemize}
 
 \section*{Lesson 60: Autoregressive Models}
 \begin{itemize}[align=left,leftmargin=*]
     \item An \textbf{autoregressive} model of order ($p$), or AR(p) is a time series where term may be expressed in term of previous terms plus white noise.
     \begin{align*}
-    x_t - \mu =& \alpha_1(x_{t-1} - \mu) + \alpha_2(x_{t-2} - \mu) \\ 
+    x_t - \mu =& \alpha_1(x_{t-1} - \mu) + \alpha_2(x_{t-2} - \mu) \\
     +& ...  + \alpha_p(x_{t-p} - \mu) + w_t
     \end{align*}
     \item An AR(1) process is stationary if $|a|<1$. correlogram is deacreasing exponentially. For a stationary AR(1) process \\
     \begin{align*}
     \hspace*{1cm}
-      \mu_k &= 0 \\  
+      \mu_k &= 0 \\
       \gamma_k &= \frac{\alpha^k \sigma_w^2}{1 - \alpha^2} \\
       \rho &= \alpha^k
     \end{align*}
@@ -1450,17 +1450,17 @@ Using a lot of feature will result of lower standard error on training data, but
         &= (\alpha_2\matr{B}^2 - \alpha_1\matr{B} + 1)x_t \\
         &= \theta_p(\matr{B})x_t
     \end{align*}
-    \item[] where $\theta_p(\matr{B})$ is the \textbf{characterictic equation}. 
+    \item[] where $\theta_p(\matr{B})$ is the \textbf{characterictic equation}.
     \item Testing stationarity: Root $< 1$
     \item[(given)] $x_t = \alpha_1 x_{t-1} + \alpha_2 x_{t-2} + w_t$
-    \item[(solve)] $\theta_p(\matr{B}) = 0$  
+    \item[(solve)] $\theta_p(\matr{B}) = 0$
     \item[(answer)] If $|\matr{B}| > 1$, the process is stationary.
     \item tips: For 2 param:
     \begin{align*}
         \hspace*{1cm}
        \alpha_2 - \alpha_1 < 1 \\
        \alpha_2 + \alpha_1 < 1 \\
-       |\alpha_2| < 1 
+       |\alpha_2| < 1
     \end{align*}
     \item Forecast $\hat{x}_{n+1|n}$ is the same equation omitting $w_t$.
 \end{itemize}
@@ -1473,31 +1473,31 @@ Using a lot of feature will result of lower standard error on training data, but
     $\hspace*{1cm}+ c_i \cos(2\pi i t/s) + z_t$
     \item Forecast correction
     \begin{itemize}
-       \item Lognormal: $e^{\sigma^2/2}$ 
+       \item Lognormal: $e^{\sigma^2/2}$
        \item Empirical: $\frac{\Sigma e^{z_t}}{n}$
     \end{itemize}
 \end{itemize}
 
 \section*{Lesson 62: moving Average Models}
 \begin{itemize}[align=left,leftmargin=*]
-   \item A \textbf{moving average} time serie (MA(q)) is alway stationary. It define as \\ 
-    $x_t = \mu + w_t + \beta_1 w_{t-1} + ... + \beta_q w_{t-q}$ \\ 
-    $\hspace*{0.35cm}= \mu + \phi(\matr{B})w_t$ 
-    \item[] with 
+   \item A \textbf{moving average} time serie (MA(q)) is alway stationary. It define as \\
+    $x_t = \mu + w_t + \beta_1 w_{t-1} + ... + \beta_q w_{t-q}$ \\
+    $\hspace*{0.35cm}= \mu + \phi(\matr{B})w_t$
+    \item[] with
     \begin{align*}
-      \mu(t) &= 0 \\  
+      \mu(t) &= 0 \\
        \gamma_k &= \sigma_w^2 \sum_{i=0}^{q-k} \beta_i \beta_{i+k}\quad \beta_0 = 1\\
-    \end{align*} 
+    \end{align*}
     \item[] and $\gamma_k = 0$ for $k>q$ so MA(q) may be good fit is we observe $\gamma_q = 0$ in correlogram.
     \item $q$ beta + $\mu$ + $\sigma_w^2 = q+2$ parameters fit.
-    \item A MA(q) is \textbf{Inversible} if all the root of 
+    \item A MA(q) is \textbf{Inversible} if all the root of
     $ \phi(\matr{B})$ are $|\matr{B}|>1$
     \item Express MA(q) in form of AR($\infty$). If $ \phi(\matr{B})$ is reversible: \\
     $\frac{1}{1+x} = 1 - x + x^2 - x^3 + x^4 + ..$\\
     $\frac{1}{1-x} = 1 + x + x^2 + x^2 + x^4 + ...$
     \item ARIMA with $p = d = 0$ is a MA(q) model.
     \item conditional sum of squared residuals: $\sum w_t^2$
-\end{itemize} 
+\end{itemize}
 
 
 \section*{Lesson 63: ARMA Models}
@@ -1512,7 +1512,7 @@ Using a lot of feature will result of lower standard error on training data, but
       \gamma_k &= \sigma_w^2 (\alpha + \beta) \alpha^{k-1}\left(\frac{1+\alpha\beta}{1 - \alpha^2}\right)
     \end{align*}
     \item[] $\rho_k = \alpha\rho_{k-1}$ for $k\geq2$.
-    \item If the process is stationary, $\esp{x_t} = \esp{x_{t-1}}$. 
+    \item If the process is stationary, $\esp{x_t} = \esp{x_{t-1}}$.
 \end{itemize}
 
 \section*{Lesson 64: ARIMA and SARIMA models}
@@ -1522,7 +1522,7 @@ Using a lot of feature will result of lower standard error on training data, but
    $\hspace*{1cm} \theta(\matr{B})(1-\matr{B})^d x_t = \phi(\matr{B})w_t$
    \begin{itemize}
      \item With no MA(q), this is ARI(p,d)
-     \item With no AR(p), this is IMA(d,q)  
+     \item With no AR(p), this is IMA(d,q)
    \end{itemize}
    \item An \textbf{SARIMA} model is a ARIMA with seasonal effect.
    \item To forecast, we take the difference and then forecast ARMA(p,q) model.
@@ -1533,8 +1533,8 @@ Using a lot of feature will result of lower standard error on training data, but
 
  \newpage
  % -------------------------------------
- % Appendix 
- % ------------------------------------- 
+ % Appendix
+ % -------------------------------------
 \title{Appendix}
 \date{}
 \author{}
@@ -1610,7 +1610,7 @@ then, $x^3 - 12x^2 - 81 = (x-3)(x^2-9x-27)$
 \end{itemize}
 
 \section*{Normal Approximation}
-\begin{itemize}[align=left,leftmargin=*]    
+\begin{itemize}[align=left,leftmargin=*]
     \item $F_X(x) = \Phi \left( \frac{X - \esp{X}}{\sqrt{\var{X}}} \right)$
     \item \textbf{Continuity correction} is necessary when X is discrete. $F_X(x) = \Phi \left( \frac{(X \pm k) - \esp{X}}{\sqrt{\var{X}}} \right)\:$ where $k$ is the mid-point of the discrete value.
 \end{itemize}
