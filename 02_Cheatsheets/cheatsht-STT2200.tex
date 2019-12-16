@@ -1,0 +1,86 @@
+\documentclass[10pt, french]{article}
+%% -----------------------------
+%% Préambule
+%% -----------------------------
+\input{cheatsht-preamble-general.tex}
+%% -----------------------------
+%% Redefine from template
+%% -----------------------------
+\def\auteur{Gabriel Crépeault-Cauchon}
+%% -----------------------------
+%% Variable definition
+%% -----------------------------
+\def\cours{Analyse de données}
+\def\sigle{STT-2200}
+%% -----------------------------
+%% Colour setup for sections
+%% -----------------------------
+\def\SectionColor{cobalt}
+\def\SubSectionColor{cobalt!50!black}
+\def\SubSubSection{cobalt!75!black}
+
+% 
+% Débute numérotation où on est rendu pour l'examen final
+% 
+\setcounter{section}{9}
+
+%% -----------------------------
+%% Début du document
+%% -----------------------------
+\begin{document}
+
+\begin{multicols*}{2}
+\section{Analyse discriminante}
+
+\subsection{Méthode de Fisher}
+
+\subsection{Analyse discriminante linéaire}
+
+
+\subsection{Analyse discriminante quadratique}
+
+
+\subsection{Matrice de confusion}
+Pour tout modèle de classification, on peut construire un tableau de mauvaisse classification (\textit{confusion matrix} en anglais), tel que
+
+\begin{tabular}{|c|c|c|}
+\hline
+Réel/Prédit & Positif & Négatif \\
+\hline
+Positif & VP & FN \\
+\hline
+Négatif & FP & FN \\
+\hline
+\end{tabular}
+
+Et on peut aussi calculer quelques mesures de performance du modèle : 
+
+\begin{align*}
+\text{Accuracy}	& = \frac{VP + VN}{\text{\# total obs.}} \\
+\text{Sensitivity}	& = \frac{VP}{\text{\# total positive}} = \frac{VP}{VP + FN} \\
+\text{Specificity}	& = \frac{VN}{\text{\# total negative}} = \frac{VN}{VN + FP} \\
+\text{Precision} & = \frac{VP}{VP + FP} \\
+\text{Score F1}	& = \frac{2}{\frac{1}{\text{Sensitivity}} + \frac{1}{\text{Specificity}}} = \frac{2 VP}{2 VP + FP + FN} \\
+\end{align*}
+
+
+
+
+\section{Arbres de classification}
+
+\subsection{Approche}
+
+
+
+\subsection{Méthodes d'ensemble}
+
+
+
+
+
+
+\end{multicols*}
+%% -----------------------------
+%% Fin du document
+%% -----------------------------
+\end{document}
