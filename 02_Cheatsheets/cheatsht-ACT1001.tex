@@ -45,19 +45,51 @@
 \section{Chapitre 1: Mesure du taux d'intérêt}
 \begin{mathfinch1}{La mesure du taux d'intérêt}
 \begin{description}
-    \item[Intérêt simple :] L'intérêt simple correspond à un montant constant qui s'ajoute à votre investissement sur une certaine \\
-    période de temps. Par exemple, 100\$ à un taux d'intérêt simple de 5\% rapporterait 5\$ à chaque année. \\
-    Pour savoir la quantité d'argent accumulé après n années, la formule utilisée est la suivante (où C correspond à l'investissement initial): \\
-    $C(1 + ni)$
+    \item[Intérêt simple :] L'intérêt simple correspond à un montant constant qui s'ajoute à votre investissement sur une certaine 
+    période de temps. Par exemple, 100\$ à un taux d'intérêt simple annuel de 5\% rapporterait 5\$ à chaque année. 
+    Pour savoir la quantité d'argent accumulé après un certain nombre de temps $t$, la formule utilisée est la suivante (où A(0) correspond à l'investissement initial): 
+    $A(t) = A(0)a(t) = A(0)(1 + ti)$, car $a(t) = (1 + ti)$ pour un taux d'intérêt simple. 
 \end{description}
 \begin{description}
-    \item[Intérêt composé :] L'intérêt composé est un montant qui varie dans le temps, car celui-ci se réapplique constamment sur la somme \\
-    que j'ai à un moment donnée. Par exemple, 100\$ à un taux d'intérêt de 5\% rapporterait 5\$ la première année. \\
-    Après un an, j'aurais donc 105\$ en poche. Pour la deuxième année, 5\% d'intérêt s'appliquerait sur mon 105\$ et non sur 100\$. \\
-    Ainsi, je gagnerais $5\% * 105\$ = 5,25\$$ la deuxième année pour un total accumulé de 110,25\$ après deux ans. \\
-    La formule pour calculer la quantité d'argent accumulé après n années à un taux d'intérêt composé i est la suivante : $ 𝐶(1 + i)^{n}$
+    \item[Intérêt composé :] L'intérêt composé est un montant qui varie dans le temps, car celui-ci se réapplique constamment sur la somme 
+    que j'ai à un moment donnée. Par exemple, 100\$ à un taux d'intérêt de 5\% rapporterait 5\$ la première année. 
+    Après un an, j'aurais donc 105\$ en poche. Pour la deuxième année, 5\% d'intérêt s'appliquerait sur mon 105\$ et non sur 100\$.
+    Ainsi, je gagnerais $5\% * 105\$ = 5,25\$$ la deuxième année pour un total accumulé de 110,25\$ après deux ans. 
+    La formule pour calculer la quantité d'argent accumulé après un certain nombre de temps à un taux d'intérêt composé annuel i est la suivante : 
+    $A(t) = A(0)a(t) = A(0)(1 + i)^{n}$, car $a(t) =(1 + i)^{n}$ pour un taux d'intérêt composé.
 \end{description}
-
+\begin{description} % changer le format de l'exemple
+    \item[Taux de rendement annuel moyen :] Pour trouver, un taux de rendement effectif sur n années, simplement multiplier les taux de rendement entre eux. 
+    Pour obtenir un taux de rendement moyen sur n années, il faut faire la racine à la n du taux de rendement trouvé. Exemple : on pose 6\% d'intérêt la première année,
+    7\% d'intérêt la deuxième année, 8\% d'intérêt la troisième année. Le taux d'intérêt effectif sur trois ans serait $(1.06)(1.07)(1.08) - 1 =  0.22$. 
+    Le taux d'intérêt moyen serait $∖sqrt[3]{1 + 0.22} - 1 = 0.069$.
+\end{description}
+\begin{description}%remplir la réponse chui trop lache en live 
+    \item[Trouver le taux d'intérêt à partir d'une fonction d'accumulation :] Un cas particulier qui pourrait survenir est de trouver le taux d'intérêt sur une période 
+    de temps à l'aide d'une fonction d'accumulation. Par exemple, $a(t) = 0.001t^2 + 0.05t + 1$ et on veut savoir le taux d'intérêt entre $t=2$ et $t=3$. Il faut appliquer la formule
+    $i_{t+h} = \frac{a(t+h)}{a(t)} - 1 $, ce qui dans l'exemple donnera $\frac{0.001(t+h)^2 + 0.05(t+h) + 1}{0.001t^2 + 0.05t + 1} - 1 = \frac{0.001*3^2 + 0.05*3 + 1}{0.001*2^2 + 0.05*2 + 1} - 1 = À REMPLIR$
+\end{description}
+\begin{description} % rajouter graphique? + rajouter exemple
+    \item[Équation de valeur :] En mathématiques financières,  la plupart des questions se résument à trouver $x$ dans une équation. 
+    Premièrement, faire une ligne du temps peut être très utile. On choisit un moment sur la ligne de temps (si le moment n'est pas spécifié bien sûr).
+    Par la suite, on actualise (diviser par $(1 + i)^t$) tous les montants après cette date et on projète dans le futur tous les montants avant (multiplier par $(1 + i)^t)$. 
+    Il peut être préférable de choisir le moment $t = 0$ et d'actualiser tous les montants dans certains cas. Par la suite, on met les entrées d'argent d'un côté et les sorties de l'autre. 
+    On résout algébriquement pour trouver $x$.
+\end{description}
+\begin{description} 
+    \item[Taux d'intérêt nominal :] Le taux d'intérêt nominal s'applique lorsque la période d'intérêt est plus petite qu'un an et correspond au taux d'intérêt multiplié par le nombre de périodes
+    Par exemple, si vous payez de l'intérêt à chaque 6 mois à 3\%, le taux d'intérêt nominal sera de $3\% * 2 = 6\%$. On voit que ce n'est pas égal au taux d'intérêt composé, 
+    qui correspond à $1.03^2 - 1 = 6.09\%$. Dès que vous voyez "nominal", changer ça en taux d'intérêt effectif à l'aide de l'équation :$i = (1 + \frac{i^(m)}{m})^m - 1$. 
+    Cette équation permet de remettre le taux d'intérêt sur une période de 6 mois par exemple, pour ensuite le remettre sur une période d'un an à l'aide d'une puissance et 
+    non d'une mutliplication (car l'intérêt composé s'applique de cette façon). Il est important de noter que le taux d'intéret effectif sera toujours supérieur au taux 
+    d'intérêt nominal.
+\end{description}
+\begin{description} 
+    \item[Taux d'escompte :] Le taux d'escompte correspond au pourcentage qu'il faut retrancher à la valeur accumulé après un certain temps afin de revenir à
+    l'investissement initial. Par exemple, pour un investissement d'un an, $A(0) = A(1) - dA(1) = (1 - d)A(1)$. Il peut être intéressant de se rappeler de la formule
+    du taux d'escompte simple $A(0) = (1 - d)A(n)$. Par contre, pour le taux d'escompte composé, il est préférable de travailler avec le taux d'intérêt avec la formule 
+    $i = \frac{d}{1-d}$. Par la suite, on fait les calculs comme vu précédemment. Si vous préférez utilisez les formules en lien avec le taux d'escompte, référez vous à la
+    fin du document.
 \end{mathfinch1}
 
 \end{multicols*}
