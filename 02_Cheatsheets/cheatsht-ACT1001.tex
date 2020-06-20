@@ -1,0 +1,65 @@
+\documentclass[10pt, french]{article}
+\usepackage[landscape, hmargin=1cm, vmargin=1.7cm]{geometry}
+
+%% -----------------------------
+%% Préambule
+%% -----------------------------
+\input{cheatsht-preamble-general.tex}
+%% -----------------------------
+%% Variable definition
+%% -----------------------------
+%% -----------------------------
+%% Footer and header customization
+%% -----------------------------
+\def\cours{Mathématiques financières}
+\def\sigle{ACT-1001}
+\fancyfoot[R]{\thepage ~de~ \pageref{LastPage}}
+\setlist{leftmargin=*}
+
+
+%% -----------------------------
+%% Colour setup for sections
+%% -----------------------------
+\def\SectionColor{green!50!black}
+\def\SubSectionColor{green!20!black}
+%% -----------------------------
+%% Definition of LaTex math commands
+%% -----------------------------
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+%
+% Redefine authors
+%
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+
+\begin{document}
+\begin{center}
+	\textsc{\Large Contributeurs}\\[0.5cm] 
+\end{center}
+\input{contributeurs/contrib-ACT1001}
+
+\newpage
+
+\raggedcolumns
+\begin{multicols*}{3}
+
+\section{Chapitre 1: Mesure du taux d'intérêt}
+\begin{mathfinch1}{La mesure du taux d'intérêt}
+\begin{description}
+    \item[Intérêt simple :] L'intérêt simple correspond à un montant constant qui s'ajoute à votre investissement sur une certaine \\
+    période de temps. Par exemple, 100\$ à un taux d'intérêt simple de 5\% rapporterait 5\$ à chaque année. \\
+    Pour savoir la quantité d'argent accumulé après n années, la formule utilisée est la suivante (où C correspond à l'investissement initial): \\
+    $C(1 + ni)$
+\end{description}
+\begin{description}
+    \item[Intérêt composé :] L'intérêt composé est un montant qui varie dans le temps, car celui-ci se réapplique constamment sur la somme \\
+    que j'ai à un moment donnée. Par exemple, 100\$ à un taux d'intérêt de 5\% rapporterait 5\$ la première année. \\
+    Après un an, j'aurais donc 105\$ en poche. Pour la deuxième année, 5\% d'intérêt s'appliquerait sur mon 105\$ et non sur 100\$. \\
+    Ainsi, je gagnerais $5\% * 105\$ = 5,25\$$ la deuxième année pour un total accumulé de 110,25\$ après deux ans. \\
+    La formule pour calculer la quantité d'argent accumulé après n années à un taux d'intérêt composé i est la suivante : $ 𝐶(1 + i)^{n}$
+\end{description}
+
+\end{mathfinch1}
+
+\end{multicols*}
+
+\end{document}
