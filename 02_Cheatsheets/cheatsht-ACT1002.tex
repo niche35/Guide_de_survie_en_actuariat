@@ -2,6 +2,8 @@
 \usepackage[landscape, hmargin=1cm, vmargin=1.7cm]{geometry}
 \usepackage{tikz}
 \usepackage{csquotes}
+\usepackage{tabularx}
+\setlength{\extrarowheight}{7pt}
 
 %% -----------------------------
 %% Préambule
@@ -41,11 +43,14 @@
 \colorlet{circle area}{blue!20}\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
     outline/.style={draw=circle edge, thick}}
 
+%% -----------------------------
+%% Setup for appendice tables
+%% -----------------------------
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
 %% French quotation marks
 \MakeOuterQuote{"}
 
-% TODO: Arranger auteurs (Nicolas Chevrette)
-% et arranger espacements (notamment en ce qui a trait aux sources
 
 \begin{document}
 \begin{center}
@@ -223,7 +228,7 @@ Un événement est un sous-ensemble d'un espace échantillonnal. On dénote l'é
 \end{center}
 
 \begin{definitionNOHFILL}[Événements mutuellement exclusifs]
-Deux événements $A$ et $B$ sont dits mutuellement exclusifs lorsque l'intersection entre les deux événements est vide ($A \cap B = \emptyset$). C'est donc dire que $\Pr(A \cap B) = 0$.
+Deux événements $A$ et $B$ sont dits mutuellement exclusifs lorsque l'intersection entre les deux événements est vide ($A \cap B = \emptyset$). C'est donc dire que $\Pr(A \cap B) = 0$. Autrement dit, les évènements n'ont aucun résultat en commun.
 \end{definitionNOHFILL}
 
 \begin{definitionNOHFILLprop}[Propriétés des ensembles]
@@ -240,12 +245,12 @@ Deux événements $A$ et $B$ sont dits mutuellement exclusifs lorsque l'intersec
 
 \subsection{Axiomes de probabilité}
 \begin{definitionNOHFILLprop}[Axiomes de probabilité]
-Supposons que pour chaque événement $E$ de $\Omega$ (espace échantillonnal d'une expérience aléatoire), il existe un nombre $\Pr(E)$. On peut appeler ce nombre $\Pr(E)$ la probabilité de E si celle-ci satisfait les axiomes ci-dessous. Autrement dit, ces axiomes sont des règles que les probabilités se doivent de respecter: 
+Supposons que, pour chaque événement $A_i$ de $\Omega$ (espace échantillonnal d'une expérience aléatoire), il existe un nombre $\Pr(A_i)$. On peut appeler ce nombre la probabilité de $A_i$ si celle-ci satisfait les axiomes ci-dessous. Autrement dit, ces axiomes sont des règles que les probabilités se doivent de respecter: 
 
 \begin{description}
-  \item[1)] $0 \leq \Pr(A) \leq 1$
+  \item[1)] $0 \leq \Pr(A_i) \leq 1$
   \item[2)] $\Pr(\Omega)=1$
-  \item[3)] Si $A_i$ $\cap$ $A_j$ = $\emptyset$ pour $i \neq j$ (mutuellement exclusifs), alors $\Pr(\bigcup_{i = 1}^{n}$ $A_i) = \sum_{i = 1}^{n} \Pr(A_i)$
+  \item[3)] Si $A_i$ $\cap$ $A_j$ = $\emptyset$ pour $i \neq j$ (\textbf{mutuellement exclusifs}), alors $$\Pr(\bigcup_{i = 1}^{n} A_i) = \sum_{i = 1}^{n} \Pr(A_i)$$
 \end{description}
 \end{definitionNOHFILLprop}
 
@@ -401,5 +406,379 @@ $$\Pr(A \cap B \cap C) =  \Pr(A) * \Pr(B) * \Pr(C).$$
 \end{description}
 \end{probch4}
 \end{multicols*}
+
+
+\appendix
+\section*{Annexe}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\subsection{Lois discrètes}
+\begin{tabularx}{\textwidth}{ | Y | c | c | c | Y | c | c |}
+\hline
+  \textbf{Loi} & $\Pr(X = x)$  & $F_X (x)$ & $E[X]$ & $Var(X)$ & $M_X(t)$ & $P_X(t)$ \\
+\hline
+\hline
+
+  Uniforme & $
+    \left\{
+    	\begin{array}{ll}
+    		\frac{1}{b - a + 1}, & x = a, a + 1, ..., b \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $
+	\left\{
+    	\begin{array}{ll}
+		0, & x < a \\
+		\frac{\left \lfloor x \right \rfloor - a + 1}{b - a + 1}, &  a \le x < b \\
+    		1,  &  x \ge b \\
+    	\end{array}
+    \right.$
+	& $\frac{a+b}{2}$
+	& $\frac{(b-a+1)^2 -1}{12}$
+	& $\frac{e^{at} - e^{(b + 1) t}}{(b-a+1)(1-e^t)}$ & \\
+\hline
+	
+  Bernouilli & $
+	\left\{
+    	\begin{array}{ll}
+		1 - p, & x =0 \\
+		p, &  x = 1 \\
+    	           0,  &  ailleurs\\
+    	\end{array}
+    \right.$ & $
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 0 \\
+		1 - p, &  0 \le x < 1 \\
+    	           1,  &  x \ge 1\\
+    	\end{array}
+    \right.$ & $p$ & $p(1-p)$ & $(1-p) + pe^t$  & $(1-p) + pt$ \\
+\hline 
+
+Binomiale & 
+ $
+    \left\{
+    	\begin{array}{ll}
+    		\binom{n}{x} p^x (1-p)^{n-x}, & x = 0,1, ..., n \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ &  $
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 0 \\
+		\sum_{k=0}^{\left \lfloor x \right \rfloor} \binom{n}{k} p^k (1-p)^{n-k}, &  0 \le x < n\\
+    	           1,  &  x \ge n\\
+    	\end{array}
+    \right.
+ $& $ np$ & $np(1-p)$ & $((1-p) + pe^t)^n$ & $((1-p) + pt)^n$ \\
+\hline
+
+Poisson &  $
+    \left\{
+    	\begin{array}{ll}
+    		\frac{\lambda^x e^{-\lambda}}{x!}, & x = 0,1, 2, ... \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ &   $
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 0 \\
+		\sum_{k=0}^{\left \lfloor x \right \rfloor}\frac{\lambda^k e^{-\lambda}}{k!}, &  x \ge 0\\
+    	\end{array}
+    \right.
+ $& $\lambda$ & $\lambda$ & $e^{\lambda(e^t -1)}$ & $e^{\lambda(t -1)}$ \\
+\hline
+
+{\begin{tabularx}{\linewidth}{ Y } 
+Géométrique \\  (\textbf{Essais}) 
+\end{tabularx}} &
+ $
+    \left\{
+    	\begin{array}{ll}
+    		p (1-p)^{(x -1)}, & x = 1, 2, ... \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $  
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 1 \\
+		1-(1-p)^{\left \lfloor x \right \rfloor}, &  x \ge 1\\
+    	\end{array}
+    \right.
+ $ &$\frac{1}{p}$ & $\frac{(1-p)}{p^2}$ & $\frac{pe^t}{1-(1-p)e^t}$ &   $\frac{pt}{1-(1-p)t}$ \\
+\hline
+
+{\begin{tabularx}{\linewidth}{ Y } 
+Binomiale négative \\  (\textbf{Essais}) 
+\end{tabularx}} &
+ $
+    \left\{
+    	\begin{array}{ll}
+    		\binom{x-1}{r-1} p^r (1-p)^{(x - r)}, & x = r, r+1, ... \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $  
+	\left\{
+    	\begin{array}{ll}
+		0, & x < r \\
+		\sum_{k=r}^{\left \lfloor x \right \rfloor} \binom{k-1}{r-1} p^r (1-p)^{(k - r)}, &  x \ge r\\
+    	\end{array}
+    \right.
+ $ &$\frac{r}{p}$ & $\frac{r(1-p)}{p^2}$ & $\left(\frac{pe^t}{1-(1-p)e^t}\right)^r$ & $\left(\frac{pt}{1-(1-p)t}\right)^r$ \\
+\hline
+
+{\begin{tabularx}{\linewidth}{ Y } 
+Géométrique \\  (\textbf{Échecs}) 
+\end{tabularx}} &
+ $
+    \left\{
+    	\begin{array}{ll}
+    		p (1-p)^{x}, & x = 0, 1, ... \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $  
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 0 \\
+		1-(1-p)^{\left \lfloor x \right \rfloor+1}, &  x \ge 0\\
+    	\end{array}
+    \right.
+ $ &$\frac{1-p}{p}$ & $\frac{(1-p)}{p^2}$ & $\frac{p}{1-(1-p)e^t}$ &   $\frac{p}{1-(1-p)t}$ \\
+\hline
+
+{\begin{tabularx}{\linewidth}{ Y } 
+Binomiale négative \\  (\textbf{Échecs}) 
+\end{tabularx}} &
+ $
+    \left\{
+    	\begin{array}{ll}
+    		\binom{x + r-1}{r-1} p^r (1-p)^{x}, & x = 0, 1, ... \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $  
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 0\\
+		\sum_{k=0}^{\left \lfloor x \right \rfloor} \binom{k-1}{r-1} p^r (1-p)^{(k - r)}, &  x \ge 0\\
+    	\end{array}
+    \right.
+ $ &$\frac{r(1-p)}{p}$ & $\frac{r(1-p)}{p^2}$ & $\left(\frac{p}{1-(1-p)e^t}\right)^r$ & $\left(\frac{p}{1-(1-p)t}\right)^r$ \\
+\hline	
+
+{\begin{tabularx}{\linewidth}{ Y } 
+Hypergéo-\\ métrique
+\end{tabularx}}& $
+    \left\{
+    	\begin{array}{ll}
+    		\frac{\binom{m}{x} \binom{N-m}{n-x}}{\binom{N}{m}}, & x = 0, 1, ..., min(m,n) \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $  
+	\left\{
+    	\begin{array}{ll}
+		0, & x < 0 \\
+		\sum_{k=0}^{\left \lfloor x \right \rfloor}\frac{\binom{m}{k} \binom{N-m}{n-k}}{\binom{N}{m}}, &  0 \le x < min(m,n)\\
+    	           1,  &  x \ge min(m,n)\\
+    	\end{array}
+    \right.
+ $ &$\frac{nm}{N}$ & 
+{\begin{tabularx}{\linewidth}{ r } 
+$\frac{nm}{N} \Big(\frac{(n-1)(m-1)}{N-1}$  \\  $+1 - \frac{nm}{N} \Big)$
+\end{tabularx}} & &\\
+\hline	
+\end{tabularx}
+
+
+
+
+\newpage
+\subsection{Lois continues}
+\begin{tabularx}{\textwidth}{ | Y | c | c | c | c | c | c  |}
+\hline
+  \textbf{Loi} & $f_X(x)$  & $F_X (x)$ & $F_X^{-1}(u)$ & $E[X]$ & $Var(X)$ & $M_X(t)$ \\
+\hline
+\hline
+
+  Uniforme & $
+    \left\{
+    	\begin{array}{ll}
+    		\frac{1}{b - a}, &  a < x < b \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le a \\
+		\frac{x - a}{b - a }, &  a < x < b \\
+    		1,  &  x \ge b \\
+    	\end{array}
+    \right.$
+	& $ a + (b -a) * u$
+	& $\frac{a+b}{2}$
+	& $\frac{(b-a)^2}{12}$
+	& $\frac{e^{bt} - e^{at}}{t(b -a)}$ \\ 
+\hline
+
+Normale  
+ & $\frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2} $ &
+$\Phi\left(\frac{x-\mu}{\sigma}\right)$ &
+$\mu +\sigma \Phi^{-1}(u)$ &
+$\mu$ &
+$\sigma^2$ &
+$e^{\mu t + \frac{\sigma^2 t^2}{2}} $ \\
+\hline
+
+Lognormale & $
+    \left\{
+    	\begin{array}{ll}
+    		\frac{1}{\sqrt{2 \pi} \sigma x} e^{-\frac{1}{2} \left(\frac{\ln x-\mu}{\sigma}\right)^2}, &  x > 0 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $ & $  
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		\Phi\left(\frac{\ln x-\mu}{\sigma}\right), &  x > 0\\
+    	\end{array}
+    \right.
+ $ &
+$e^{\mu +\sigma \Phi^{-1}(u)}$ &
+$e^{\mu + \frac{\sigma^2}{2}} $ &
+$e^{2 \mu + \sigma^2}\left(e^{\sigma^2}-1\right)$ & \\
+\hline
+
+Exponentielle & $
+ \left\{
+    	\begin{array}{ll}
+    		\lambda e^{-\lambda x}, &  x > 0 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $& $
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		1 - e^{-\lambda x}, &  x > 0 \\
+    	\end{array}
+    \right.$
+	& $ \frac{-\ln (1-u)}{\lambda}$
+	& $\frac{1}{\lambda}$
+	& $\frac{1}{\lambda^2}$
+	& $\frac{\lambda}{\lambda - t}$ \\ 
+\hline
+
+Gamma & $
+ \left\{
+    	\begin{array}{ll}
+    		\frac{\lambda^{\alpha} x^{\alpha - 1} e^{-\lambda x}}{\Gamma (\alpha)}, &  x > 0 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $& $
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		\frac{\Gamma(\alpha; \lambda x)}{\Gamma (\alpha)}, &  x > 0 \\
+    	\end{array}
+    \right.$
+	& 
+	& $\frac{\alpha}{\lambda}$
+	& $\frac{\alpha}{\lambda^2}$
+	& $\left(\frac{\lambda}{\lambda - t}\right)^\alpha$ \\ 
+\hline
+
+Erlang (Gamma où $\alpha \in \mathbb{Z} $) & $
+ \left\{
+    	\begin{array}{ll}
+    		\frac{\lambda^{\alpha} x^{\alpha - 1} e^{-\lambda x}}{\Gamma (\alpha)}, &  x > 0 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $& $
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		1 - \sum_{k=0}^{\alpha - 1} \frac{(\lambda x)^k e^{- \lambda x}}{k!}, &  x > 0 \\
+    	\end{array}
+    \right.$
+	& 
+	& $\frac{\alpha}{\lambda}$
+	& $\frac{\alpha}{\lambda^2}$
+	& $\left(\frac{\lambda}{\lambda - t}\right)^\alpha$ \\ 
+\hline
+
+ Khi-carré & $
+ \left\{
+    	\begin{array}{ll}
+    		\frac{ x^{\frac{n}{2} - 1} e^{-\frac{x}{2}}}{2^{\frac{n}{2}} \Gamma \left(\frac{n}{2}\right)}, &  x > 0 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $&$
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		\frac{\Gamma\left(\frac{n}{2}; \frac{x}{2}\right)}{\Gamma \left(\frac{n}{2}\right)}, &  x > 0 \\
+    	\end{array}
+    \right.$
+	& 
+	& $n$
+	& $2n$
+	& $\left(\frac{1}{1- 2t}\right)^{\frac{n}{2}}$ \\ 
+\hline
+
+Bêta & $
+ \left\{
+    	\begin{array}{ll}
+    		\frac{\Gamma(\alpha + \beta) x^{\alpha - 1} (1-x)^{\beta- 1}}{\Gamma (\alpha)\Gamma (\beta)}, &  0 < x < 1 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $& $
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		\frac{B(x; \alpha, \beta)}{B (\alpha,  \beta)},&  0 < x < 1 \\
+		1,  &  x \ge 1 \\
+    	\end{array}
+    \right.$
+	& 
+	& $\frac{\alpha}{\alpha +\beta}$
+	& $\frac{\alpha \beta}{(\alpha +\beta)^2 (\alpha +\beta +1)}$
+	& $1 +\sum_{k=1}^\infty \frac{t^k}{k!} \prod_{j=1}^{k-1} \frac{\alpha + j}{\alpha + \beta +1}$ \\ 
+\hline
+
+Pareto & $
+\left\{
+    	\begin{array}{ll}
+    		\frac{\alpha \lambda^\alpha}{(\lambda +x)^{\alpha+1}}, &  x>0 \\
+    		0,  &  ailleurs \\
+    	\end{array}
+    \right.
+    $& $
+	\left\{
+    	\begin{array}{ll}
+		0, & x \le 0 \\
+		1 - \left(\frac{\lambda}{\lambda + x}\right)^\alpha, &  x > 0 \\
+    	\end{array}
+    \right.$
+	& 
+	& $\frac{\lambda}{\alpha -1}$
+	& $\frac{\alpha \lambda^2}{(\alpha - 1)^2 (\alpha - 2)}$
+	& \\ 
+\hline
+
+	
+\end{tabularx}
+
 
 \end{document}
