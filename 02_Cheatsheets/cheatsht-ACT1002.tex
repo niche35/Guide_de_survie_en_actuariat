@@ -740,21 +740,141 @@ Vous devez également comprendre que ces résultats sont des raccourcis. Si vous
 Voici d'autres points importants :
 
 \begin{itemize}
-	\item Il ne faut pas apprendre par coeur les différentes démonstrations permettant d'obtenir les formules à l'annexe. Cependant, certaines des techniques utilisées au cours de ces démonstrations peuvent être utiles si on vous demande des quantités que vous ne connaissez pas. Par exemple, si on vous dit que $X$ suit une loi Gamma (chapitre 5), et qu'on vous demande le 6e moment d'une loi Gamma ($E[X^6]$), il faudra utiliser une technique vue lors de la démonstration de l'espérance (ou de la FGM) de cette loi (on réfère souvent à cette technique comme une complétion de la loi Gamma)
+	\item Il ne faut pas apprendre par coeur les différentes démonstrations permettant d'obtenir les formules à l'annexe. Cependant, certaines des techniques utilisées au cours de ces démonstrations peuvent être utiles si on vous demande des quantités que vous ne connaissez pas. \textbf{Il est donc important de comprendre les preuves et de se rappeler des technique utilisées.}Par exemple, si on vous dit que $X$ suit une loi Gamma (chapitre 5), et qu'on vous demande le 6e moment d'une loi Gamma ($E[X^6]$), il faudra utiliser une technique vue lors de la démonstration de l'espérance (ou de la FGM) de cette loi (on réfère souvent à cette technique comme une complétion de la loi Gamma)
 	\item Si on vous demande des quantités que vous ne connaissez pas, il faudra passer par les définitions.
 	\item Si on vous demande le deuxième moment ($E[X^2]$), on isole le deuxième moment dans la formule de la variance (puisqu'on connait les formules de l'espérance et de la variance) : $E[X^2] = Var(X) + (E[X])^2$.
 	\item Il y a deux définitions aux lois géométrique et binomiale négative. Je vous conseille d'être à l'aise avec les formules liées aux deux définitions, ou de bien comprendre le lien qui unit les deux définitions pour chacune des deux lois.
 	\item Les lois géométrique (définition avec le nombre d'essais) et exponentielle (vue au chapitre 5) sont sans-mémoire. C'est donc dire que si $X$ suit une de ces deux lois, $E[X - d|X > d] = E[X]$. De façon générale, on peut donc dire que l'expérience passée n'a aucun impact sur l'expérience futur pour ces lois. Les démonstrations liées à la propriété sans mémoire pour ces deux lois sont importantes à comprendre.
 \end{itemize}
 
-
 \end{definitionNOHFILL}
 
+\begin{definitionNOHFILL}[Problème contextuel avec des lois connus]
+Dans certains cas, il faudra identifier des lois connues dans des problèmes contextuels.\textbf{ Lorsqu'il s'agit d'une mise en situation, où aucune loi vous n'est mentionée, il s'agit d'une situation discrète (Vous ne devriez jamais identifier une loi continue si celle-ci ne vous est pas explicitement donnée)}.Voici les étapes à suivre afin de résoudre ces problèmes.\\
+
+\begin{enumerate}
+\item Définissez la variable connue. Par exemple, $X$ : Nombre de boules noires pigées. 
+\item Assurez-vous que la situation est liée à une loi connue. Il est possible qu'une situation vous soit présentée et que celle-ci ne soit pas liée à une loi connue. Il faudra donc utiliser les outils d'analyse combinatoire vue au chapitre 1 afin de trouver, premièrement, la fonction de masse, et d'ensuite trouver les autres quantités demandées (comme l'espérance) s'il y a lieu.
+\item Si la situation est liée à une loi connue, il faut dire quelle loi suit X, et quels sont les paramètres de X. Par exemple : $X \sim Binomiale(n = 3, p = \frac{1}{4})$
+\item Définissez ce qu'on cherche. Par exemple, on cherche $P(X > 5)$.
+\item Par la suite, on utilise les formules apprises par coeur (ou les définitions si on ne connait pas la formule liée à la quantitée recherchée), afin de trouver la réponse à la question sous-entendue dans la mise en situation.
+\end{enumerate}
+\end{definitionNOHFILL}
+
+Voici maintenant différentes lois discrètes et le contexte derrière l'utilisation de chacune des lois.
+
+\begin{formula}{Loi binomiale}
+    On s'intéresse au nombre de fois qu'un évènement se réalise au cours de $n$ essais. La probabilité que l'évènement se réalise reste toujours la même pour chacun des essais (\textbf{avec remise}). \\
+    Exemple : Il y a 10 boules noires, 5 boules blanches dans l’urne. Quelle est la probabilité que je tire exactement 3 boules noires au bout de 5 lancers, \textbf{sachant qu’on remet la boule pigée à chaque fois.}
+    \begin{center}
+    X : Nombre de boules noires pigées
+    \end{center}
+    $$X \sim Binomiale\bigg(n = 5, p = \frac{2}{3}\bigg)$$\\
+    On cherche $\Pr(X = 3)$.
+\end{formula}
+\begin{formula}{Loi hypergéométrique}
+       On s'intéresse au nombre de fois qu'un évènement se réalise au cours de $n$ essais. La probabilité que l'évènement se réalise \textbf{ne} reste \textbf{pas} toujours la même pour chacun des essais (\textbf{sans remise}). \\
+    Exemple : Il y a 10 boules noires, 5 boules blanches dans l’urne. Quelle est la probabilité que je tire exactement 3 boules noires au bout de 5 lancers, \textbf{sachant qu’on ne remet pas la boule pigée à chaque fois.}
+    \begin{center}
+    X : Nombre de boules noires pigées
+    \end{center}
+    $$X \sim Hypergéométrique(N = 15, n = 5, m = 10)$$\\
+    On cherche $\Pr(X = 3)$.
+\end{formula}
+\begin{formula}{Loi géométrique}
+Le nombre d’essais \textbf{(ou d’échecs)} que ça prend avant d’obtenir un évènement en particulier. La probabilité d'obtenir cet évènement reste la même à chaque essai.\\
+
+Exemple : Il y a 7 balles blanches et 2 balles noires dans une urne. Quelle est la probabilité que ça me prenne exactement 10 \textbf{essais} afin de tirer une balle noire, sachant qu’on remet la balle pigée dans l’urne après chaque tirage?
+\begin{center}
+X : Nombre d'essais avant de piger une balle noire
+\end{center}
+$$X \sim Géométrique\bigg(p=\frac{2}{9}\bigg)$$\\
+On cherche $\Pr(X = 10)$.
+\end{formula}
+
+\begin{formula}{Loi binomiale négative}
+Le nombre d’essais \textbf{(ou d’échecs)} que ça prend avant d’obtenir $r$ évènements en particulier. La probabilité d'obtenir cet évènement reste la même à chaque essai.\\
+
+Exemple : Il y a 7 balles blanches et 2 balles noires dans une urne. Quelle est la probabilité que ça me prenne exactement 10 \textbf{essais} afin de tirer deux balles noires, sachant qu’on remet la balle pigée dans l’urne après chaque tirage?
+\begin{center}
+X : Nombre d'essais avant de piger deux balles noires
+\end{center}
+$$X \sim Binomiale~Négative\bigg(r =2,p=\frac{2}{7}\bigg)$$\\
+On cherche $\Pr(X = 10)$.
+\end{formula}
+\begin{formula}{Loi de Poisson}
+Il y a k évènements sur une période fixe. Il n’y a pas de limite au nombre d’évènements possibles sur cette période de temps. Le fait qu'un évènement se réalise n'a pas d'impact sur le temps avant que le prochain évènement se réalise (à voir plus en détail dans le cours de processus stochastiques). \\
+
+Ex : Il y a en moyenne deux autobus jaunes par heure qui passent devant chez nous. Le nombre d'autobus jaunes par heure suit une loi de Poisson. Quelle est la probabilité qu’il y ait 5 autobus jaunes qui passent devant chez nous en \textbf{deux heures}? 
+\begin{center}
+X : Nombre d'autobus jaunes en deux heures
+\end{center}
+$$X \sim Poisson(\lambda = 2*2 = 4)$$\\
+On cherche $\Pr(X = 5)$.
+\end{formula}
+\begin{formula}{Loi uniforme discrète}
+Chaque évènement a la même probabilité de se produire sur un intervalle de $a$ à $b$\\
+
+Exemple:  Il y a des boules numérotées de 1 à 9 dans une urne. Quelle est la probabilité que je pige la boule numéro 4 si je pige une seule boule?
+
+\begin{center}
+X : Numéro de la boule pigée
+\end{center}
+$$X \sim Uniforme~Discrète(a = 1, b = 9)$$\\
+On cherche $\Pr(X = 4)$.
+\end{formula}
+\begin{formula}{Loi de Bernoulli}
+On s'intéresse à la réalisation d'un évènement.\\
+
+Exemple : Il y a 93\% de chances qu'il pleuve aujourd'hui. On définit la variable X ci-dessous.  Quelle est la variance reliée à X.
+
+$$X =
+\left\{
+	\begin{array}{ll}
+		1  & \mbox{s'il pleut}\\
+		0 & \mbox{s'il ne pleut pas}
+	\end{array}
+\right.
+$$
+
+$$X \sim Bernoulli(p=0.93)$$
+
+On cherche Var(X).
+\end{formula}
+\begin{definitionNOHFILLprop}[Convolution de lois connues discrètes]
+Si on additionne des variables suivant des lois connues ensemble, et que ces variables sont i.i.d. (indépendantes et identiquement distribuées), la somme de ces variables va suivre une nouvelle loi dans certains cas. Soit $X_1$, $X_2$, ..., $X_m$ qui sont i.i.d, voici les résultats connus dans le cas discret.
+
+\begin{itemize}
+    \item $X_i \sim$ Bernoulli ($p$) $\to$ $X_1 +X_2 + ... + X_m \sim$ Binomiale ($m, p$)
+    \item $X_i \sim$ Binomiale ($n, p$) $\to$ $X_1 +X_2 + ... + X_m \sim$ Binomiale ($n*m, p$)
+    \item $X_i \sim$ Poisson ($\lambda$) $\to$ $X_1 +X_2 + ... + X_m \sim$ Poisson ($\lambda * m$)
+    \item $X_i \sim$ Géométrique ($p$) $\to$ $X_1 +X_2 + ... + X_m \sim$ Binomiale Négative ($m, p$)
+    \item $X_i \sim$ Binomiale Négative ($r, p$) $\to$ $X_1 +X_2 + ... + X_m \sim$ Binomiale Négative ($m*r, p$)
+\end{itemize}
+
+La preuve suit la même logique dans tous les cas, soit en passant par la fonction génératrice des moments et en utilisant l'indépendance et le fait que les variables sont identiquement distribuées. \\
+
+Par exemple, pour $X_1 +X_2 + ... + X_m \sim$ Binomiale ($m, p$), où $X_i \sim$ Bernoulli ($p$), on aurait
+\begin{align*}
+  M_{X_1 +X_2 + ... + X_m} (t) &= E\left[e^{(X_1 +X_2 + ... + X_m)t}\right]
+  \\&= E\left[e^{X_1t}\right]*E\left[e^{X_2t}\right]*...*\left[e^{X_mt}\right]~~(ind\acute{e}pendance)
+  \\&= \left(E\left[e^{X_1t}\right]\right)^m~~(indentiquement ~distribu\acute{e}es)
+  \\&= \left(M_{X_1}(t)\right)^m
+  \\&= ((1-p)+pe^t)^m
+\end{align*}
+
+On retrouve la fonction génératrice d'une loi binomiale de paramètre ($m, p$).
+\end{definitionNOHFILLprop}
+\begin{definitionNOHFILLprop}[Approximation de la loi binomiale par la loi de Poisson]
+Si $X \sim$ Binomiale ($n,p$), si $n$ est grand et si $p$ est petit, on peut approximer X par une loi de Poisson ($\lambda = n * p$).\\
+
+\textbf{Faites cette approximation uniquement lorsqu'il est mentionné de le faire.}
+\end{definitionNOHFILLprop}
 \end{multicols*}
 
 
 
-%contexte derrière des lois + approximation %
+% Proof-reading (acute e et grave e et apostrophe dans ce que j'ai copy paste) + changer de couleur les espérances (et autres au besoin)%
 
 
 
@@ -788,7 +908,7 @@ Voici d'autres points importants :
 	& $\frac{e^{at} - e^{(b + 1) t}}{(b-a+1)(1-e^t)}$ & \\
 \hline
 	
-  Bernouilli & $
+  Bernoulli & $
 	\left\{
     	\begin{array}{ll}
 		1 - p, & x =0 \\
