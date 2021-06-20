@@ -1,6 +1,6 @@
 \documentclass[10pt, french]{article}
 \usepackage[landscape, hmargin=1cm, vmargin=1.7cm]{geometry}
-\usepackage{tikz}
+\usepackage{tikz,pgfplots}
 \usepackage{csquotes}
 \usepackage{tabularx}
 \setlength{\extrarowheight}{7pt}
@@ -377,35 +377,385 @@ $$\Pr(A \cap B \cap C) =  \Pr(A) * \Pr(B) * \Pr(C).$$
 
 
 \pagebreak
-\section{Chapitre 4:\\ Variable aléatoire discrète}
-\begin{probch4}{La variable aléatoire}
-  \begin{description}
-    \item[Définition :] Nous avons déjà vu que les événements sont délimités par l'ensemble échantillonnal S, c'est-à-dire les résultats possibles de l'événement. La variable aléatoire, disons X, sera une fonction de cet ensemble S (S $\in$ $\mathbb{R}$).\\
-    Le support, que l'on peut comparer à l'image de la fonction, d'un événement X est composé des résultats possibles d'une expérience, par exemple [0, 1] ou encore un ensemble dénombrable comme \{0, 1/2, 1\}.\\
-    Pour bien comprendre la différence entre l'espace échantillonnal et le support de X, voici un petit exemple : \\
-    On lance une pièce de monnaie deux fois et on définit la variable aléatoire X comme étant le nombre de faces obtenus. L'espace échantillonnal de l'expérience est \{(P,P), (P,F), (F,P), (F,F)\} et le support de X est de \{0, 1, 2\}.
-	\item [Fonction de masse de probabilité :] La probabilité d'avoir un résultat égal à x. Cette fonction est définie par $\Pr(X = x_i)$ 
-	\item[Fonction de répartition ($F_{X} (x)$):] La probabilité d'avoir un résultat inférieur à x.
-    \begin{align*}
-    F_{X} (x) &= \Pr(X \le x) \\
-    &= \sum_{x_{i} \le x}^{} \Pr(X = x_{i})
-    \end{align*}
-    Pour illustrer la fonction de répartition, on peut s'imaginer un lancer de dé et définir X comme le résultat du lancer. $F_{X} (2)$, par exemple, donnerait alors 1/3 car seuls les résultats 1 et 2 sont considérés sur l'ensemble des 6 possibilités. 
-    \item[Propriétés de la fonction de répartition :] La valeur de la fonction de répartition se situe toujours entre 0 et 1, ce qui est logique étant donné que la somme de toutes les probabilités est toujours égale à 1 et qu'il n'existe pas de probabilité inférieure à 0. \\
-    La fonction est aussi toujours non-décroissante, car il est impossible de perdre des probabilités alors que les probabilités qui s'ajoutent à mesure que x augmente sont toujours supérieures à 0 (pour une variable aléatoire discrète, cela donne une fonction en escalier à droite).\\
-    On sait donc que $F_{X} (a) \le F_{X} (b)$ pour a < b. On peut alors trouver que Pr(a < X $\le$ b) = $F_{X} (b) - F_{X} (a)$.
-    \item[Fonction de répartition inverse ($F^{-1}_{X} (u)$):] Aussi nommée la fonction quantile, cette fonction sert à déterminer quel résultat correspond à une quantité u de probabilités accumulées. Par exemple, si je prends un u de 0,5, le résultat sera la médiane. \\
-	Cela fonctionne de la façon suivante : on remplace le x de la fonction de répartition par u et cette nouvelle fonction est mise égale à x et on isole le u. Autrement dit, il faut trouver une fonction réciproque. \\
-	\item[Espérance :] L'espérance correspond à une moyenne pondéré des probabilités où les pondérations correspondent aux différents valeurs que peut prendre la variable $X$. Elle est définie de la façon suivante: \\
-	$$ E[X] = \sum_i x_i * \Pr(X = x_i) $$. L'espérance correspond au résultat espéré lors de l'expérience. Par exemple, l'espérance d'une expérience consistant à lancer un dé serait 3.5. De plus, \\
-	il est possible de calculer l'espérance d'une fonction $g(X)$. L'espérance, dans ce cas-ci, est définie de la façon suivante : $E[g(X)] = \sum_i g(x_i) * \Pr(X = x_i) $. \\
-	\item[Propriétés de l'espérance: ] L'espérance est un opérateur linéaire. Ainsi, $E[2x^2+6x+5]$ peut se réécrire, une fois simplifiée, $2E[X^2]+6E[X]+5$. Aussi, si $g(x) \le h(x)$, $\forall x$, alors $E[g(x)] \le E[h(h)]$. \\
-	\item[Variance :] La variance est une mesure de dispersion qui se trouve à être la moyenne du carrée des écarts entre x et sa moyenne. La variance est définie de la façon suivante : $ Var(X) = E[(X - E[X])^2]$. En développant cette \\ 
-	expression, on retrouve l'expression davantage utilisée en probabilité, soit $Var(X) = E[X^2] - (E[X])^2$.  Afin de calculer la variance on trouve habituellement le premier et le deuxième moment de X et on remplace dans la formule. \\
-	De plus, la variance n'est pas un opérateur linéaire. Cependant, $Var(aX + b) = a^2 Var(X)$ où $a$ et $b$ sont des constantes réelles.
+\section{Variable aléatoire discrète}
+\subsection{Variable aléatoire}
+
+\begin{definitionNOHFILL}[Variable aléatoire]
+Une variable aléatoire $X$ est une fonction qui associe une nombre réel $X(E)$ à un évènement $E$ de l'espace échantillonnal. Autrement dit, une variable aléatoire est le résultat (exprimé sous forme de nombre réel) d'un événement aléatoire.
+\end{definitionNOHFILL}
+
+\begin{definitionNOHFILL}[Support d'une variable aléatoire]
+Le support d'une variable aléatoire est l'ensemble des valeurs que peut prendre la variable aléatoire. Le support peut être discret, continu ou mixte. \textbf{Pour les exercices du chapitre 4 et du chapitre 5, assurez-vous de déterminer tout d'abord si vous êtes dans un contexte discret ou dans un contexte continu (les cas mixtes seront vus plus en détail dans des cours ultérieurs)}. 
+\end{definitionNOHFILL}
+
+\subsection{Définitions importantes}
+\begin{definitionNOHFILL}[Support discret]
+Le support d'une variable aléatoire est dit discret lorsque que les valeurs que la variable peut prendre sont dénombrables.
+\end{definitionNOHFILL}
+
+\subsection{Fonction de masse de probabilité, de répartition et quantile}
+\begin{definitionNOHFILLsub}[Fonction de masse de probabilité]
+Pour chaque valeur $x$ du support, on associe une probabilité qui correspond aux chances que la variable aléatoire prenne cette valeur $x$ en question. La notation pour la fonction de masse est la suivante : $\Pr(X = x).$\\
+
+La somme des probabilités associées aux différentes valeurs du support donne nécessairement $1$ : 
+$$\sum_{i=1}^\infty \Pr(X = x_i) = 1$$\\
+
+Un graphique de la fonction de masse est un graphique en bâtons (ou avec des points). Par exemple, soit la fonction de masse de probabilité définie de la façon suivante:
+$$\Pr(X = x) = 
+\left\{
+	\begin{array}{ll}
+		0.2,  &  x = 0\\
+		0.7, & x = 1\\
+		0.1, & x = 2
+	\end{array}
+\right.
+$$\\
+
+Un graphique approprié serait le suivant.\\
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+		xlabel=$x$,
+		ylabel={$\Pr(X = x)$}
+	]
+\addplot+[ycomb] plot coordinates
+	{(0,0.2) (1,0.7) (2,0.1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{definitionNOHFILLsub}
+
+\begin{definitionNOHFILLsub}[Fonction de répartition]
+Pour chaque valeur $x$ du support, on associe une probabilité qui correspond aux chances que la variable aléatoire prenne une valeur plus petite ou inférieure à la valeur $x$ en question. La notation pour la fonction de répartition est la suivante : $P(X \leq x)$ ou $F_X(x).$ \\
+
+\begin{definitionNOHFILLprop}[Propriétés de la fonction de répatition]
+\begin{description}
+  \item[1)] $0 \leq F_X(x) \leq 1$, $\forall x \in \mathbb{R}$ 
+  \item[2)] $\lim_{x \to -\infty} F_X(x) = 0$ et $\lim_{x \to \infty} F_X(x) = 1$
+  \item[3)] $F_X(x)$ est une fonction non-décroissante, c'est-à-dire que si a < b, alors $F_X(a) \leq F_X(b)$ 
+  \item[4)] $\Pr(a < X \leq b) = F_X(b) - F_X(a)$
 \end{description}
-\end{probch4}
+\textbf{Pour la dernière propriété, dans le cas discret, faites bien attention au signe d'égalité.}
+\end{definitionNOHFILLprop}
+
+Afin de trouver la fonction de répartition à partir de la fonction de masse, on utilise le lien suivant : $\Pr(X \leq x) = \sum_{x_i \leq x} \Pr(X = x_i)$.\\
+
+ Afin de trouver la fonction de masse à partir de la fonction de répartition, on utilise le lien suivant : $\Pr(X = x) = \Pr(X \leq x) - \Pr(X \leq x - 1)$.\\
+
+
+Un graphique de la fonction de répartition est un graphique en escalier avec des points dans l'ordre fermé-ouvert (donc continue à droite). Le signe d'égalité correspond au point fermé. Par exemple, soit la fonction de répartition suivante (issue de la fonction de masse définie précédemment):\\
+
+$$\Pr(X \leq x) = 
+    \left\{
+    	\begin{array}{ll}
+    		0, & x < 0\\
+    		0.2,  &  0 \leq x < 1\\
+    		0.9, & 1 \leq x < 2\\
+    		1, & 2 \leq x
+    	\end{array}
+    \right.
+    $$\\
+    
+Un graphique approprié serait le suivant.\\
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xmin = 0, xmax = 3, xlabel=$x$, ylabel={$\Pr(X \leq x)$}]
+\addplot+[const plot]
+coordinates
+{(-3, 0) (0,0.2)    (1,0.9)  (2,1) (8,1)};
+\addplot [only marks, mark=o, blue] table {
+1  0.2
+2 0.9
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+On peut remarquer, entre autres, que la courbe continue à droite de $x = 2$.
+\end{definitionNOHFILLsub}
+
+\begin{definitionNOHFILLsub}[Fonction de répartition inverse (quantile)]
+Le nom l'indique, la fonction de répartition inverse est la fonction inverse de la fonction de répartition. Afin de trouver la valeur $x$ associée à une probabilité $u$, il faut se demander \textbf{quelle est la plus valeur x qui assure une probabilité cumulative (fonction de répartition) plus grande ou égale que $u$.} La notation pour la fonction de répartition inverse est la suivante : $F_X^{-1}(u)$. \\
+
+La médiane est la fonction de répartition inverse évaluée à $u = 0.5$.
+
+Un graphique de la fonction de répartition inverse est un graphique en escalier avec des points dans l'ordre ouvert-fermé (donc continue à gauche). Le signe d'égalité correspond au point fermé. Par exemple, soit la fonction de répartition inverse suivante (issue de la fonction de répartition définie précédemment):\\
+
+$$F^{-1}_X(u) = 
+    \left\{
+    	\begin{array}{ll}
+    		0, & 0 < u \leq 0.2\\
+    		1,  &  0.2 < u \leq 0.9\\
+    		2, & 0.9 < u \leq 1\\
+    	\end{array}
+    \right.
+    $$\\
+    
+Un graphique approprié serait le suivant.\\
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xlabel=$u$, ylabel={$F_X^{-1}(u)$}, xmin = 0, ymin = 0]
+\addplot[const plot, blue]
+coordinates
+{(0, 0) (0.2,1) (0.9,2) (1, 2)};
+\addplot [only marks, blue] table {
+0.2 0
+0.9 1
+1   2
+};
+\addplot [only marks, mark=o, blue] table {
+0	0
+0.2 1
+0.9 2
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+On peut remarquer, entre autres, que la courbe s'arrête à $u = 1$.\\
+
+Ce graphique est parfois difficile à dessiner. Je vous invite à trouver tout d'abord la fonction de répartition (si cette information n'est pas déjà disponible), à ensuite définir la fonction de répartition inverse (en vous disant quelle est la plus petite valeur de x qui assure une probabilité plus grande ou égale à u) et à ensuite dessiner le graphique en vous basant sur la fonction de répartition inverse que vous avez définie.
+\end{definitionNOHFILLsub}
+
+\subsection{Fonction d'une variable aléatoire}
+
+\begin{definitionNOHFILL}[Fonction d'une variable aléatoire]
+
+Lorsqu'on cherche de l'information (à l'exception des moments) sur une variable alétoire de Y qui correspond à une fonction de $X$, il faut absolument trouver en premier la fonction de masse de $Y$. \textbf{Dans le cas discret}, on trouve la valeur de $y$ qui correspond à chaque valeur de $x$ et on vient regrouper les probabilités ensemble au besoin.\\
+
+Par exemple, soit $Y = X^2$ et la fonction de masse de X définit de la façon suivante : 
+$$P(X = x) = 
+\left\{
+	\begin{array}{ll}
+		0.1,  &  x = -1\\
+		0.7, & x = 0\\
+		0.2, & x = 1
+	\end{array}
+\right.
+$$\\
+
+La fonction de masse de Y serait:
+$$P(Y = y) = 
+\left\{
+	\begin{array}{ll}
+		0.7, & y = 0\\
+		0.1 + 0.2 = 0.3, & y = 1
+	\end{array}
+\right.
+$$\\
+
+Pour tout ce qui est lié au moment (variance, espérance, FGM, etc.), on n'est pas obligé de trouver la fonction de masse de Y. Par exemple, si on s'intéresse à l'espérance de $Y$, on pourrait réécrire $E[Y]$ comme $E[X^2]$ et ensuite utiliser directement la fonction de masse de X.
+\end{definitionNOHFILL}
+
+\subsection{Moments d'une variable aléatoire}
+
+
+\begin{definitionNOHFILL}[Espérance]
+
+On peut voir l'espérance comme une moyenne pondérée des valeurs que $X$ peut prendre. La pondération est la probabilitée associée à chaque valeur que $X$ peut prendre.\\
+
+La notation utilisée pour l'espérance est $E[X]$. L'espérance est définie sous forme mathématique de la façon suivante : 
+
+$$E[X] = \sum_i x_i \Pr(X = x_i).$$
+
+De façon plus générale, on peut appliquer le même principe lorsqu'on cherche l'espérance d'une fonction de X (Puissance de X, fonction indicatrice, fonction tronquée, etc.). On aura pour une fonction $g(X)$ : 
+$$E[g(X)] = \sum_i g(x_i) \Pr(X = x_i)$$
+
+\begin{definitionNOHFILLprop}[Propriétés de l'espérance]
+\begin{description}
+  \item[1)] Soit $c$ une constante. Alors, $E[c] = c$.
+  \item[2)] Soit $g$ une fonction dans $\mathbb{R}$. Alors, $E[cg(X)] = cE[g(X)]$.
+  \item[3)] Soit $g$ et $h$ deux fonctions dans $\mathbb{R}$. Alors, $E[g(X) + h(X)] = E[g(X)] + E[h(X)]$.
+  \item[4)] Si $g(x) \leq h(x)$, $\forall x$, alors $ E[g(X)] \leq E[h(X)]$.
+\end{description}
+
+Par exemple, $E[2X + 3X^2 + 4] = 2E[X] + 3E[X^2] + 4 $. Je vous conseille de simplifier toujours l'expression recherchée de cette façon avant de passer par les définitions.
+\end{definitionNOHFILLprop}
+
+
+Une autre façon de calculer l'espérance $E[X]$, lorsqu'on connait la fonction de répartition et qu'on sait que la variable ne prend pas de valeurs négatives, est la suivante :
+ 
+$$E[X] =  \sum_{x=0}^\infty \Pr(X>x) = \sum_{x=0}^\infty (1 - F_X (x))$$
+\end{definitionNOHFILL}
+
+Ci-dessous se trouvent des exemples d'espérance utilisés en assurance, ainsi qu'une courte description décrivant l'utilisation de chacune de ces espérances. Ces espérances seront vues plus en détail dans le cours d'IARD 1. L'important pour le cours de probabilité, \textbf{c'est de pouvoir calculer les espérances qui seront souvent déjà données sous forme de notation. Portez donc attention à chaque étape du calcul} Les mises en situation servent donc plus, à court terme, à vous montrer l'utilité derrière chaque type d'espérance. \\
+
+\textbf{Il est à noter que, pour ces exemples, on suppose une variable aléatoire discrète qui ne peut pas prendre de valeur négative. C'est donc dire que les paiements dans les exemples décrits ci-dessous peuvent se faire uniquement à l'unité près. Sinon, on relèverait du chapitre 5 qui décrit les cas continus (ce qui est plus courant en pratique pour ce genre de calcul)}
+
+\begin{definitionNOHFILLprop}[Espérance d'une fonction indicatrice]
+Par exemple, soit une variable indicatrice qui est égale à $1$ lorsque $X \leq 3$ et égale à $0$ autrement, on aurait (dans ce cas-ci précisément, on suppose que X a un support discret non négatif):
+
+$$E[1_{x \leq 3}] =  \sum_{x=0}^\infty 1_{x \leq 3} * \Pr(X = x) = \sum_{x \leq 3} \Pr(X = x) = F_X (3)$$
+
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Espérance tronquée]
+Par exemple, on suppose que le montant de la perte liée à un sinistre suit une variable aléatoire \textbf{discrète} X. Supposons qu'une compagnie d'assurance ne pait que lorsque le sinistre est entre 200\$ et 300\$ inclusivement. Sinon, la compagnie ne pait pas. On peut espérer que le montant payé par la compagnie d'assurance, \textbf{par perte}, soit le montant suivant.
+
+$$E[X* 1_{200 \leq X \leq 300}] =  \sum_{x=0}^\infty x*1_{200 \leq x \leq 300} * \Pr(X = x) = \sum_{200 \leq x \leq 300} x*\Pr(X = x)$$
+
+Si on s'intéressait au montant, \textbf{par paiement}, on aurait :
+
+ \begin{align*}
+  E[X|200 \leq X \leq 300]&= \sum_{x=0}^\infty  x * \Pr(X = x | 200 \leq X \leq 300) 
+  \\&= \sum_{x=0}^\infty x * \frac{\Pr(X = x \cap 200 \leq X \leq 300)}{\Pr(200 \leq X \leq 300)} 
+  \\&= \sum_{200 \leq x \leq 300} \frac{x*\Pr(X = x)}{\Pr(200 \leq X \leq 300)} 
+  \end{align*}
+
+En comparant les deux dernières équations, on remarque que:
+$$E[X|200 \leq X \leq 300] = \frac{E[X* 1_{200 \leq X \leq 300}]}{P(200 \leq X \leq 300)}$$\\
+
+\textbf{De façon générale, s'il y a une condition dans l'espérance, tout ce qu'on vient modifier c'est la fonction de masse (ou de densité dans le cas continu) utilisé dans le développement de l'espérance.}
+
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Espérance limitée]
+Par exemple, on suppose que le montant de la perte liée à un sinistre suit une variable aléatoire \textbf{discrète} X. Supposons qu'une compagnie d'assurance pait jusqu'à un maximum de 3000\$ (limite de 3000 \$). On peut espérer que le montant payé par la compagnie d'assurance pour une perte ou pour une réclamation (dans ce cas-ci il n'y aurait pas de différence, puisque la compagnie paiera dans tous les cas) soit le montant suivant.
+
+\begin{align*}
+  E[min(X, 3000)]&= \sum_{x=0}^\infty min(x, 3000) * \Pr(X = x) 
+  \\&= \sum_{x=0}^{3000} min(x, 3000) * \Pr(X = x) 
+  \\&+ \sum_{3001}^\infty min(x, 3000) * \Pr(X = x)
+  \\&= \sum_{x=0}^{3000} x * \Pr(X = x) + \sum_{3001}^\infty 3000 * \Pr(X = x) 
+  \\&= \sum_{x=0}^{3000} x * \Pr(X = x) + 3000 \Pr(X > 3000)
+  \\&= \sum_{x=0}^{3000} x * \Pr(X = x) + 3000 (1 - F_X(3000))
+  \end{align*}
+
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Espérance stop-loss]
+Par exemple, on suppose que le montant de la perte liée à un sinistre suit une variable aléatoire \textbf{discrète} X. Supposons que l'assuré doit payer une franchise de 500\$. On peut espérer que le montant payé par la compagnie d'assurance \textbf{par perte} soit le montant suivant.
+
+\begin{align*}
+  E[max(X - 500, 0)]&= \sum_{x=0}^\infty max(X - 500, 0) * \Pr(X = x) 
+  \\&= \sum_{x=0}^{500} max(x - 500, 0) * \Pr(X = x)  
+  \\&+ \sum_{501}^\infty max(x - 500, 0) * \Pr(X = x)
+  \\&= \sum_{501}^\infty (x - 500) * \Pr(X = x)
+  \\&= \sum_{501}^\infty x * \Pr(X = x) - \sum_{501}^\infty 500 * \Pr(X = x) 
+  \\&= \sum_{501}^\infty x * \Pr(X = x) - 500 \Pr(X > 500)
+  \\&= \sum_{501}^\infty x * \Pr(X = x) + 500(1 - F_X(500))
+  \end{align*}
+  
+ Si on s'intéressait au montant \textbf{par paiement}, on aurait (en réutilisant ce qui a été vu au point concernant l'espérance tronquée): 
+ 
+ \begin{align*}
+  E[X-500|X>500] &= E[X|X>500] - 500
+  \\&= \sum_{x > 500} \frac{x*\Pr(X = x)}{\Pr(X>500)} - 500
+  \\&= \sum_{x > 500} \frac{x*\Pr(X = x)}{1 - F_X(500)} - 500
+  \end{align*}
+ 
+\end{definitionNOHFILLprop}
+
+
+\begin{definitionNOHFILL}[Variance]
+
+La variance est une mesure de dispersion qui nous renseigne sur la variation d'une variable aléatoire autour de son espérance. Plus la variance est petite, plus on peut s'attendre à ce que le résultat de la variable aléatoire soit autour de l'espérance, et vice-versa.\\
+
+La notation utilisée pour la variance est $Var(X)$. La définition de la variance la plus pratique à utiliser est la suivante :
+$$ Var(X) = E[X^2] - (E[X])^2.$$
+Il faut donc trouver le premier moment ($E[X]$) et le deuxième moment ($E[X^2]$), afin de trouver la variance.
+
+\begin{definitionNOHFILLprop}[Propriétés de la variance]
+\begin{description}
+  \item[1)] Soit $c$ une constante. Alors, $Var(c) = 0$.
+  \item[2)] Soit $a$ une constante et $g(X)$ une fonction de $X$. Alors, $Var(ag(X)) = a^2 Var(g(X))$.
+\end{description}
+
+Par exemple, $Var(2X + 5) = 4Var(X) $. Je vous conseille de simplifier toujours l'expression recherchée de cette façon avant de passer par les définitions.\\
+
+D'autres propriétés de la variance liées aux covariances seront vues au chapitre 7.
+\end{definitionNOHFILLprop}
+\end{definitionNOHFILL}
+
+
+\begin{definitionNOHFILLprop}[Moments d'ordre $n$]
+$$E[X^n] = \sum_i x_i^n \Pr(X = x_i)$$
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Moments \textbf{centrés} d'ordre $n$]
+$$E[(X-E[X])^n] = \sum_i (x_i-E[X])^n \Pr(X = x_i)$$
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Moments \textbf{réduits} d'ordre $n$]
+$$E\left[\left(\frac{X}{\sqrt{Var(X)}}\right)^n\right] = \sum_i \left(\frac{x_i}{\sqrt{Var(X)}}\right)^n \Pr(X = x_i)$$
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Moments \textbf{centrés réduits} d'ordre $n$]
+$$E\left[\left(\frac{X-E[X]}{\sqrt{Var(X)}}\right)^n\right] = \sum_i \left(\frac{x_i-E[X]}{\sqrt{Var(X)}}\right)^n \Pr(X = x_i)$$\\
+
+Le moment centré réduit d'ordre 3 correspond au coefficient d'asymétrie.\\
+
+Un coefficient d'asymétrie \textbf{positif} indique que la courbe est décalée vers la \textbf{gauche}. La moyenne est donc \textbf{supérieure} à la médiane. \\
+
+Au contraire, un coefficient d'asymétrie \textbf{négatif} indique que la courbe est décalée vers la \textbf{droite}. La moyenne est donc \textbf{inférieure} à la médiane.\\
+
+Le moment centré réduit d'ordre 4 correspond au coefficient d'aplatissenent (aussi appelé kurtosis). \textbf{Plus le kurtosis est \textbf{grand}, moins la courbe est aplatie, et vice-versa}.
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Fonction génératrice des moments]
+
+$$M_X(t) = E[e^{tx}] = \sum_i e^{tx_i} \Pr(X = x_i)$$\\
+
+Afin d'obtenir les différents moments à partir de la fonction :
+
+$$E[X^k] = \frac{d^k}{dt^k}M_X(t) \bigg\rvert_{t=0}$$
+
+On peut trouver la FGM à partir de la FGP de la façon suivante :
+
+$$M_X(t) = P_X(e^t)$$
+
+\end{definitionNOHFILLprop}
+
+\begin{definitionNOHFILLprop}[Fonction génératrice des probabilités]
+
+$$P_X(t) = E[t^X]=\sum_i t^{x_i} \Pr(X = x_i)$$\\
+
+On peut trouver les probabilités associées à $X$ à partir de la FGP à l'aide de la formule suivante \textbf{(faites attention au $k!$)}:
+$$\frac{d^k}{dt^k}P_X(t) \bigg\rvert_{t=0} = k! *P(X =k) $$
+    
+On peut trouver les différents moments factoriels à l'aide de la formule suivante:
+$$\frac{d^k}{dt^k}P_X(t) \bigg\rvert_{t=1} = E[X(X-1)...(X - k + 1)]$$
+
+On peut trouver la FGP à partir de la FGM de la façon suivante :
+
+$$P_X(t) = M_X(\ln(t)))$$\\
+
+\textbf{En sachant la formule de la FGM pour les différentes lois, on peut utiliser ce lien afin de retrouver la FGP (et donc on peut éviter de mémoriser les FGP des différentes lois de cette façon).}\\
+
+\textbf{La fonction génératrice des probabilités n'existe que dans les cas discrets.}
+
+\end{definitionNOHFILLprop}
+
+\subsection{Lois connues}
+
+\begin{definitionNOHFILL}[Information concernant les lois connues]
+
+\textbf{Les résultats qu'il faut apprendre par coeur se retrouvent à l'annexe à la fin de ce document. Il est important de comprendre que ce n'est pas toutes les lois inscrites qu'il faut apprendre par coeur (il est important de valider avec l'enseignant de ce côté).}\\
+
+Vous devez également comprendre que ces résultats sont des raccourcis. Si vous oubliez une des formules en examen, il est possible (à l'exception des fonctions de masse) de retrouver la formule à l'aide des définitions vues précédemment. Cependant, cela peut prendre un certain temps, et c'est pourquoi il est bien important de savoir par coeur les résultats des différentes lois qu'il faut apprendre.  
+
+Voici d'autres points importants :
+
+\begin{itemize}
+	\item Il ne faut pas apprendre par coeur les différentes démonstrations permettant d'obtenir les formules à l'annexe. Cependant, certaines des techniques utilisées au cours de ces démonstrations peuvent être utiles si on vous demande des quantités que vous ne connaissez pas. Par exemple, si on vous dit que $X$ suit une loi Gamma (chapitre 5), et qu'on vous demande le 6e moment d'une loi Gamma ($E[X^6]$), il faudra utiliser une technique vue lors de la démonstration de l'espérance (ou de la FGM) de cette loi (on réfère souvent à cette technique comme une complétion de la loi Gamma)
+	\item Si on vous demande des quantités que vous ne connaissez pas, il faudra passer par les définitions.
+	\item Si on vous demande le deuxième moment ($E[X^2]$), on isole le deuxième moment dans la formule de la variance (puisqu'on connait les formules de l'espérance et de la variance) : $E[X^2] = Var(X) + (E[X])^2$.
+	\item Il y a deux définitions aux lois géométrique et binomiale négative. Je vous conseille d'être à l'aise avec les formules liées aux deux définitions, ou de bien comprendre le lien qui unit les deux définitions pour chacune des deux lois.
+	\item Les lois géométrique (définition avec le nombre d'essais) et exponentielle (vue au chapitre 5) sont sans-mémoire. C'est donc dire que si $X$ suit une de ces deux lois, $E[X - d|X > d] = E[X]$. De façon générale, on peut donc dire que l'expérience passée n'a aucun impact sur l'expérience futur pour ces lois. Les démonstrations liées à la propriété sans mémoire pour ces deux lois sont importantes à comprendre.
+\end{itemize}
+
+
+\end{definitionNOHFILL}
+
 \end{multicols*}
+
+
+
+%contexte derrière des lois + approximation %
+
 
 
 \appendix
@@ -622,9 +972,9 @@ $\frac{nm}{N} \Big(\frac{(n-1)(m-1)}{N-1}$  \\  $+1 - \frac{nm}{N} \Big)$
     	\end{array}
     \right.$
 	& $ a + (b -a) * u$
-	& $\frac{a+b}{2}$
-	& $\frac{(b-a)^2}{12}$
-	& $\frac{e^{bt} - e^{at}}{t(b -a)}$ \\ 
+	& $\dfrac{a+b}{2}$
+	& $\dfrac{(b-a)^2}{12}$
+	& $\dfrac{e^{bt} - e^{at}}{t(b -a)}$ \\ 
 \hline
 
 Normale  
@@ -670,10 +1020,10 @@ Exponentielle & $
 		1 - e^{-\lambda x}, &  x > 0 \\
     	\end{array}
     \right.$
-	& $ \frac{-\ln (1-u)}{\lambda}$
-	& $\frac{1}{\lambda}$
-	& $\frac{1}{\lambda^2}$
-	& $\frac{\lambda}{\lambda - t}$ \\ 
+	& $ \dfrac{-\ln (1-u)}{\lambda}$
+	& $\dfrac{1}{\lambda}$
+	& $\dfrac{1}{\lambda^2}$
+	& $\dfrac{\lambda}{\lambda - t}$ \\ 
 \hline
 
 Gamma & $
@@ -691,9 +1041,9 @@ Gamma & $
     	\end{array}
     \right.$
 	& 
-	& $\frac{\alpha}{\lambda}$
-	& $\frac{\alpha}{\lambda^2}$
-	& $\left(\frac{\lambda}{\lambda - t}\right)^\alpha$ \\ 
+	& $\dfrac{\alpha}{\lambda}$
+	& $\dfrac{\alpha}{\lambda^2}$
+	& $\left(\dfrac{\lambda}{\lambda - t}\right)^\alpha$ \\ 
 \hline
 
 Erlang (Gamma où $\alpha \in \mathbb{Z} $) & $
@@ -711,9 +1061,9 @@ Erlang (Gamma où $\alpha \in \mathbb{Z} $) & $
     	\end{array}
     \right.$
 	& 
-	& $\frac{\alpha}{\lambda}$
-	& $\frac{\alpha}{\lambda^2}$
-	& $\left(\frac{\lambda}{\lambda - t}\right)^\alpha$ \\ 
+	& $\dfrac{\alpha}{\lambda}$
+	& $\dfrac{\alpha}{\lambda^2}$
+	& $\left(\dfrac{\lambda}{\lambda - t}\right)^\alpha$ \\ 
 \hline
 
  Khi-carré & $
@@ -733,7 +1083,7 @@ Erlang (Gamma où $\alpha \in \mathbb{Z} $) & $
 	& 
 	& $n$
 	& $2n$
-	& $\left(\frac{1}{1- 2t}\right)^{\frac{n}{2}}$ \\ 
+	& $\left(\dfrac{1}{1- 2t}\right)^{\frac{n}{2}}$ \\ 
 \hline
 
 Bêta & $
@@ -752,8 +1102,8 @@ Bêta & $
     	\end{array}
     \right.$
 	& 
-	& $\frac{\alpha}{\alpha +\beta}$
-	& $\frac{\alpha \beta}{(\alpha +\beta)^2 (\alpha +\beta +1)}$
+	& $\dfrac{\alpha}{\alpha +\beta}$
+	& $\dfrac{\alpha \beta}{(\alpha +\beta)^2 (\alpha +\beta +1)}$
 	& $1 +\sum_{k=1}^\infty \frac{t^k}{k!} \prod_{j=1}^{k-1} \frac{\alpha + j}{\alpha + \beta +1}$ \\ 
 \hline
 
@@ -771,9 +1121,9 @@ Pareto & $
 		1 - \left(\frac{\lambda}{\lambda + x}\right)^\alpha, &  x > 0 \\
     	\end{array}
     \right.$
-	& 
-	& $\frac{\lambda}{\alpha -1}$
-	& $\frac{\alpha \lambda^2}{(\alpha - 1)^2 (\alpha - 2)}$
+	& $ \lambda \left((1- u)^{-\frac{1}{\alpha}} -1\right) $
+	& $\dfrac{\lambda}{\alpha -1}$
+	& $\dfrac{\alpha \lambda^2}{(\alpha - 1)^2 (\alpha - 2)}$
 	& \\ 
 \hline
 
